@@ -21,13 +21,11 @@ y = torch.tensor([[150],
                   [250]], dtype=torch.float32)
 
 # Saves stats
-x_mean = x.mean(dim=0)
-x_std = x.std(dim=0)
+x_mean = x.mean(dim=0) # Calculate mean for each feature (size and bedrooms) to compare with new data
+x_std = x.std(dim=0) # Calculate standard deviation for each feature (size and bedrooms) to compare with new data
 
 # Normalize training data
-x = (x - x_mean) / x_std
-
-
+x = (x - x_mean) / x_std # give the results of the normalization to x to be used in the training of the model
 
 
 # Create a simple model
