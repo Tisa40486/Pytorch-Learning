@@ -7,7 +7,7 @@ en fonction de la température dehors.
 
 import numpy as np
 from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
+import t.pyplot as plt
 
 # ============================================
 # ÉTAPE 1 : Créer des données fictives
