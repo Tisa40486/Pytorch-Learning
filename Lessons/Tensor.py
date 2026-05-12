@@ -3,6 +3,10 @@ import torch as torch;
 print("=" * 50)
 print("Tensors en PyTorch")
 print("=" * 50)
+
+#Tensor is a data structure that can hold data in multiple dimensions.
+
+
 # Simple tensor
 x = torch.tensor(5)
 print("0D =", x)
@@ -11,11 +15,9 @@ print("0D =", x)
 vector = torch.tensor([1, 2, 3, 4, 5])
 print("1D =", vector)
 
-
 # Tensor 2D matrice
 matrice = torch.tensor([[1, 2, 3], 
                         [4, 5, 6]])
-
 print("2D =", matrice)
 
 # Shape of tensor
