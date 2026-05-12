@@ -529,7 +529,7 @@ print(f"\nMaison 130m² + 3 chambres → Prix prédit: {prix_predit.item():.1f}k
 
 ```
 ┌─────────────────┐
-│   Données Brutes │
+│ Données Brutes. │
 └────────┬────────┘
          │
          ▼

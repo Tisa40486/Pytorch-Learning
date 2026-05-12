@@ -3,22 +3,72 @@ import torch.nn as nn
 import torch.optim as optim
 
 # Create synthetic data for house price prediction
-
-# Input: [size in sqft, number of bedrooms]
-x = torch.tensor([[100.0, 3.0],
-                  [150.0, 4.0],
-                  [80.0, 2.0],
-                  [120.0, 3.0],
-                  [200.0, 5.0],
-                  [180.0, 4.0]], dtype=torch.float32)  
+x = torch.tensor([
+    [65.0, 2.0],
+    [72.0, 2.0],
+    [85.0, 3.0],
+    [90.0, 3.0],
+    [95.0, 3.0],
+    [110.0, 4.0],
+    [120.0, 4.0],
+    [130.0, 4.0],
+    [145.0, 5.0],
+    [160.0, 5.0],
+    [175.0, 6.0],
+    [190.0, 6.0],
+    [210.0, 7.0],
+    [230.0, 7.0],
+    [250.0, 8.0],
+    [70.0, 2.0],
+    [88.0, 3.0],
+    [105.0, 4.0],
+    [125.0, 4.0],
+    [155.0, 5.0],
+    [170.0, 5.0],
+    [185.0, 6.0],
+    [205.0, 7.0],
+    [225.0, 7.0],
+    [240.0, 8.0],
+    [260.0, 9.0],
+    [75.0, 2.0],
+    [98.0, 3.0],
+    [115.0, 4.0],
+    [135.0, 4.0]
+], dtype=torch.float32)
 
 # Output: house prices in dollars
-y = torch.tensor([[150],
-                  [200],
-                  [130],
-                  [170],
-                  [300],
-                  [250]], dtype=torch.float32)
+y = torch.tensor([
+    [120000.0],
+    [128500.0],
+    [145000.0],
+    [158000.0],
+    [165000.0],
+    [195000.0],
+    [215000.0],
+    [230000.0],
+    [275000.0],
+    [310000.0],
+    [355000.0],
+    [390000.0],
+    [470000.0],
+    [520000.0],
+    [610000.0],
+    [125000.0],
+    [152000.0],
+    [185000.0],
+    [225000.0],
+    [295000.0],
+    [340000.0],
+    [385000.0],
+    [455000.0],
+    [510000.0],
+    [590000.0],
+    [690000.0],
+    [132000.0],
+    [172000.0],
+    [205000.0],
+    [245000.0]
+], dtype=torch.float32)
 
 # Saves stats
 x_mean = x.mean(dim=0) # Calculate mean for each feature (size and bedrooms) to compare with new data
@@ -30,13 +80,13 @@ x = (x - x_mean) / x_std # give the results of the normalization to x to be used
 
 # Create a simple model
 model = nn.Sequential(
-    nn.Linear(2, 16),
+    nn.Linear(2, 30),
     nn.ReLU(),
-    nn.Linear(16, 8),
+    nn.Linear(30, 16),
     nn.ReLU(),
-     nn.Linear(8, 4),
+     nn.Linear(16, 8),
     nn.ReLU(),
-    nn.Linear(4, 1)
+    nn.Linear(8, 1)
 )
 
 # Create a loss function and an optimizer
