@@ -84,7 +84,7 @@ model = nn.Sequential(
     nn.ReLU(),
     nn.Linear(30, 16),
     nn.ReLU(),
-     nn.Linear(16, 8),
+    nn.Linear(16, 8),
     nn.ReLU(),
     nn.Linear(8, 1)
 )
