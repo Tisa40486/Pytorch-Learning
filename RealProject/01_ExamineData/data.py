@@ -157,3 +157,64 @@ print("\nData after standardization (z-score):")
 print(df_standardized)
 print(f"Mean of Price after standardization: {df_standardized['Price'].mean()}")
 print(f"Std Dev Price: {df_standardized['Price'].std():.6f} (close to 1)")
+print("\n")
+
+print("\n" + "=" * 50)
+print("STEP 5: Feature Engineering")
+print("=" * 50)
+
+# create new intelligent columns
+df_feature = df_standardized.copy()
+df_feature['Date'] = pd.to_datetime(df_feature['Date'])
+
+df_feature['Day'] = df_feature['Date'].dt.day
+df_feature['Month'] = df_feature['Date'].dt.month
+df_feature['Year'] = df_feature['Date'].dt.year
+df_feature['Date'].dt.day_of_week
+
+df_feature['Price_Previous'] =  df_feature['Price'].shift(1)  # Create a new column with the previous day's price
+df_feature['Price_Change'] = df_feature['Price'] - df_feature['Price_Previous']  # Create a new column for price change 
+df_feature['Price_Change_Pct'] = df_feature['Price_Change'] / df_feature['Price_Previous'] * 100  # Create a new column for price change percentage
+
+df_feature['Price_MA3'] = df_feature['Price'].rolling(window=3).mean()  # Create a new column for 3-day moving average of price
+
+
+print("\nData after feature engineering:")
+print(df_feature)
+print("\n")
+
+df_feature_cleaned = df_feature.dropna()
+print("Data after dropping rows with NaN values (due to feature engineering):")
+print(df_feature_cleaned)
+print("\n")
+
+
+
+print("\n" + "=" * 50)
+print("Visualize the data")
+print("=" * 50)
+
+
+fig, axes = plt.subplots(2, 1, figsize=(10, 6))
+
+axes[0].plot(df['Date'], df['Price'], marker='o', label='Raw', color='red')
+axes[0].set_title("Raw Data (with NAN and outliers)")
+axes[0].set_ylabel("Price")
+axes[0].set_xlabel("Date")
+axes[0].legend()
+axes[0].grid(True, alpha=0.3)
+
+axes[1].plot(df_feature_cleaned['Date'], df_feature_cleaned['Price'], marker='o', 
+             label='Cleaned' ,  color = 'green')
+axes[1].plot(df_feature_cleaned['Date'], df_feature_cleaned['Price_MA3'], marker='x', 
+             label='3-day MA', color = 'red', linestyle='--')
+axes[1].set_title("Cleaned Data (with feature engineering)")
+axes[1].set_ylabel("Price")
+axes[1].set_xlabel("Date")
+axes[1].legend()
+axes[1].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+
